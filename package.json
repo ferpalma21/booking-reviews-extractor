@@ -1,0 +1,21 @@
+{
+  "name": "booking-reviews-extractor",
+  "version": "1.0.0",
+  "description": "Get scores and reviews from Booking.com",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "booking",
+    "hotel",
+    "reviews",
+    "score",
+  ],
+  "author": "ferpalma21",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
