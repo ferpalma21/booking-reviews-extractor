@@ -4,14 +4,27 @@ const cheerio = require('cheerio');
  * @param {string} url - Booking.com hotel page
  */
 
+function validURL(url){
+  url = new URL(url);
+  return ((url.protocol == 'http' || url.protocol == 'https') && url.hostname == 'booking.com');
+}
+
 async function requestBooking(url) {
-    const response = await fetch(url);
-    const body = await response.text();
-    let $ = cheerio.load(body);
-    const res = {
-      score: await extractBookingScore($),
-      reviews: await extractReviews($)
-    }
+  if (!validURL(url)){
+    console.error('Invalid URL format https://booking.com/url/to/your/hotel');
+    return false;
+  }
+  const response = await fetch(url);
+  if (response.status !== 200) {
+    console.error('Invalid url. Status code:', response.status);
+    return false;
+  }
+  const body = await response.text();
+  let $ = cheerio.load(body);
+  const res = {
+    score: await extractBookingScore($),
+    reviews: await extractReviews($)
+  }
 }
 
 async function extractBookingScore($) {
